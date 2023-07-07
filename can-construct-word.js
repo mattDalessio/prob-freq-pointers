@@ -8,12 +8,16 @@
  */
 function canConstructWord(word, letters) {
 
+  word = word.toLowerCase();
+  letters = letters.toLowerCase();
   if (letters === '') return false;
+  if (word === '') return true;
+
 
   if (!word.split('').includes(letters)) return false;
 
-  const freqOfWord = frequencyCounter(word.toLowerCase());
-  const freqOfLetters = frequencyCounter(letters.toLowerCase());
+  const freqOfWord = frequencyCounter();
+  const freqOfLetters = frequencyCounter(letters);
 
   for (const str in freqOfLetters) {
     if (str in freqOfWord) {
