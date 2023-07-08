@@ -13,17 +13,19 @@ function canConstructWord(word, letters) {
   if (letters === '') return false;
   if (word === '') return true;
 
-
-  if (!word.split('').includes(letters)) return false;
-
-  const freqOfWord = frequencyCounter();
+  const freqOfWord = frequencyCounter(word);
   const freqOfLetters = frequencyCounter(letters);
 
-  for (const str in freqOfLetters) {
-    if (str in freqOfWord) {
-      return freqOfLetters[str] === freqOfWord[str];
+  for (const str in freqOfWord) {
+    if (str in freqOfLetters) {
+      if (freqOfLetters[str] < freqOfWord[str]) {
+        return false;
+      }
+    } else {
+      return false;
     }
   }
+  return true;
 }
 
 /**freq counter O(n)
@@ -32,7 +34,7 @@ function canConstructWord(word, letters) {
  */
 function frequencyCounter(input) {
   const itemCountObject = {};
-
+  console.log(input);
   for (const item of input) {
     itemCountObject[item] = (itemCountObject[item] || 0) + 1;
   }
